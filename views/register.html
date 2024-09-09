@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Page</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="/css/navber.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #0097a7;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .navbar .login-btn {
+            background-color: #555;
+            border-radius: 20px;
+            color: white;
+            padding: 10px 20px;
+        }
+
+        .navbar .signup-btn {
+            background-color: red;
+            border-radius: 20px;
+            color: white;
+            padding: 10px 20px;
+        }
+
+        /* Sign Up form */
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            background-color: white;
+            padding: 40px;
+            margin: 50px auto;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .login-container label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .login-container input[type="email"],
+        .login-container input[type="password"],
+        .login-container input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .login-container .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .login-container .submit-btn:hover {
+            background-color: darkred;
+        }
+
+        .login-container p {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .login-container a {
+            color: red;
+            text-decoration: none;
+        }
+
+        .login-container a:hover {
+            text-decoration: underline;
+        }
+
+        .remember-container {
+            margin: 10px 0;
+        }
+
+        .remember-container input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+    </style>
+</head>
+<body>
+
+   <!-- Navbar -->
+   <div class="w3-bar navbar-logo">
+    <!-- Logo on the left -->
+    <div class="w3-bar-item">
+        <img src="/img/tsu.png" alt="Logo">
+    </div>
+
+    <!-- Right buttons -->
+    <div class="w3-bar-item navbar-buttons">
+        <a href="#" class="w3-button w3-white w3-border w3-round-large">กิจกรรมแนะแนวทั้งหมด</a>
+        <button class="w3-button w3-white w3-border w3-round-large">เข้าสู่ระบบ</button>
+        <button class="w3-button w3-red w3-round-large">สมัครสมาชิก</button>
+    </div>
+</div>
+    <!-- Sign Up form -->
+    <div class="login-container">
+        <h2>SIGN UP</h2>
+        <form action="/submit-signup" method="post">
+            <label for="email">EMAIL</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+            <label for="password">PASSWORD</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+
+            <label for="name">NAME</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+            <label for="surname">SURNAME</label>
+            <input type="text" id="surname" name="surname" placeholder="Enter your surname" required>
+
+            <label for="course">COURSE</label>
+            <input type="text" id="course" name="course" placeholder="Enter your course" required>
+
+            <div class="remember-container">
+                <input type="checkbox" id="remember" name="remember">
+                <label for="remember">REMEMBER ME</label>
+            </div>
+
+            <button type="submit" class="submit-btn">SIGN UP</button>
+        </form>
+        <p>NEED AN ACCOUNT? <a href="#">LOG IN</a></p>
+    </div>
+
+</body>
+</html>

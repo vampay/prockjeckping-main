@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <title>API Page</title>
+
+    <link href="index.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/navber.css">
+    <style>
+        .activity-card {
+            max-width: 300px;
+            margin: 15px;
+        }
+        .card-content {
+            padding: 15px;
+        }
+        .card-header {
+            background-color: #008b56;
+            color: white;
+            padding: 10px;
+        }
+        .card-body {
+            background-color: #F1F1F1;
+            padding: 10px;
+        }
+        .card-body p {
+            margin: 0;
+            line-height: 1.6;
+        }
+        .find-product {
+            text-align: right;
+            margin-top: 10px;
+        }
+
+    </style>
+  </head>
+  <body>
+    
+    <!-- Navbar -->
+    <div class="w3-bar navbar-logo">
+        <!-- Logo on the left -->
+        <div class="w3-bar-item">
+            <img src="/img/tsu.png" alt="Logo">
+        </div>
+
+        <!-- Right buttons -->
+        <div class="w3-bar-item navbar-buttons">
+            <a href="#" class="w3-button w3-red w3-round-large">ประวัติของผู้ใช้งาน</a>
+            <button class="w3-button w3-white w3-border w3-round-large">กิจกรรมแนะนำที่ลงได้</button>
+            <button class="w3-button w3-white w3-border w3-round-large">กิจกรรมแนะนำทั้งหมด</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+      <div class="d-flex bd-highlight mb-3">
+        <div class="me-auto p-2 bd-highlight">
+          <h2>Users</h2>
+        </div>
+        <!-- <div class="p-2 bd-highlight">
+          <button type="button" class="btn btn-secondary" onclick="showUserCreateBox()">Create</button>
+        </div> -->
+      </div>
+
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">ชื่อ</th>
+              <th scope="col">นามสกุล</th>
+              <th scope="col">วันที่เข้าแนะแนว</th>
+              <th scope="col">สังกัดหลักสูตร</th>
+              <th scope="col">จำนวนคนที่เข้าร่วม</th>
+              <th scope="col">ชื่อโรงเรียน</th>
+            </tr>
+          </thead>
+          <tbody id="mytableUser">
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+          fetch('/api/school/')
+              .then(response => response.json())
+              .then(data => {
+                  const tableBody = document.getElementById('mytableUser');
+                  tableBody.innerHTML = ''; // Clear existing content
+
+                  data.forEach(row => {
+                      const tr = document.createElement('tr');
+                      
+                      tr.innerHTML = `
+                          <td>${row.name}</td>
+                          <td>${row.surname}</td>
+                          <td>${new Date(row.date).toLocaleDateString()}</td>
+                          <td>${row.course}</td>
+                          <td>${row.student_count}</td>
+                          <td>${row.school_name}</td>
+                      `;
+                      
+                      tableBody.appendChild(tr);
+                  });
+              })
+              .catch(error => console.error('Error fetching data:', error));
+      });
+  </script>
+  </body>
+</html>

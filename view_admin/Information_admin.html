@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Information Form</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="/css/navber.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        /* Container for the form and image */
+        .w3-container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Form box */
+        .form-box {
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 5px solid #0097a7;
+        }
+
+        .form-box label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-box input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-box input[type="file"] {
+            margin: 10px 0;
+        }
+
+        .form-box button {
+            padding: 10px 20px;
+            background-color: #0097a7;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-box button:hover {
+            background-color: #007b8a;
+        }
+
+        /* Placeholder image */
+        .image-box {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .image-box img {
+            max-width: 100%;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+        }
+
+        .image-box p {
+            font-weight: bold;
+            color: #0097a7;
+        }
+
+        .image-box p span {
+            display: block;
+            color: black;
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="w3-bar navbar-logo">
+        <!-- Logo on the left -->
+        <div class="w3-bar-item">
+            <img src="/img/tsu.png" alt="Logo">
+        </div>
+
+        <!-- Right buttons -->
+        <div class="w3-bar-item navbar-buttons">
+            <a href="#" class="w3-button w3-white w3-border w3-round-large">กิจกรรมแนะแนวทั้งหมด</a>
+            <button class="w3-button w3-red w3-round-large">เพิ่มข้อมูลการไปแนะแนว</button>
+            <!-- <button class="w3-button w3-white w3-border w3-round-large">กิจกรรมแนะนำทั้งหมด</button> -->
+        </div>
+    </div>
+
+<!-- Main container -->
+<div class="w3-container w3-card w3-round-large">
+    <div class="w3-row-padding">
+        <!-- Image section -->
+        <div class="w3-col m4">
+            <div class="image-box">
+                <img src="https://via.placeholder.com/150" alt="School Image">
+                <p>
+                    โรงเรียน: <span>-----------------------</span><br>
+                    วันที่เข้าแนะแนว: <span>-----------------------</span><br>
+                    ช่วงเวลา: <span>-----------------------</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- Form section -->
+        <div class="w3-col m8">
+            <div class="form-box">
+                <h3>กรอกข้อมูล</h3>
+                <form id="schoolForm">
+                    <input type="date" id="date" name="date" required>
+                    <input type="time" id="startTime" name="startTime" required>
+                    <input type="time" id="endTime" name="endTime" required>
+                    <input type="text" id="school_name" name="school_name" placeholder="School Name" required>
+                    <input type="text" id="district" name="district" placeholder="District" required>
+                    <input type="text" id="provinc" name="provinc" placeholder="Province" required>
+                    <input type="number" id="student_count" name="student_count" placeholder="Student Count" required>
+                    <input type="text" id="teacher_name" name="teacher_name" placeholder="Teacher Name" required>
+                    <input type="tel" id="phone_teacher" name="phone_teacher" placeholder="Phone Number" required>
+                    <input type="text" id="faculty" name="faculty" placeholder="Faculty" required>
+                    <button type="submit">Submit</button>
+                </form>
+                <p id="responseMessage"></p>
+                
+                <script>
+                    document.getElementById('schoolForm').addEventListener('submit', function(event) {
+                        event.preventDefault(); // Prevent form from submitting the traditional way
+                
+                        // Validate form data
+                        const date = document.getElementById('date').value;
+                        const startTime = document.getElementById('startTime').value;
+                        const endTime = document.getElementById('endTime').value;
+                        const schoolName = document.getElementById('school_name').value;
+                        const district = document.getElementById('district').value;
+                        const provinc = document.getElementById('provinc').value;
+                        const studentCount = parseInt(document.getElementById('student_count').value, 10);
+                        const teacherName = document.getElementById('teacher_name').value;
+                        const phoneTeacher = document.getElementById('phone_teacher').value;
+                        const faculty = document.getElementById('faculty').value;
+                
+                        if (!date || !startTime || !endTime || !schoolName || !district || !provinc || isNaN(studentCount) || !teacherName || !phoneTeacher || !faculty) {
+                            document.getElementById('responseMessage').innerText = 'กรุณากรอกข้อมูลให้ครบถ้วน';
+                            return;
+                        }
+                
+                        const formData = {
+                            date,
+                            startTime,
+                            endTime,
+                            school_name: schoolName,
+                            district,
+                            provinc,
+                            student_count: studentCount,
+                            teacher_name: teacherName,
+                            phone_teacher: phoneTeacher,
+                            faculty
+                        };
+                
+                        fetch('/api/school/', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify(formData),
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                document.getElementById('responseMessage').innerText = 'กรอกข้อมูลเรียบร้อยแล้ว';
+                                document.getElementById('schoolForm').reset(); // Optionally clear the form
+                            } else {
+                                document.getElementById('responseMessage').innerText = 'กรอกข้อมูลไม่สำเร็จ: ' + (data.message || 'ไม่ทราบรายละเอียด');
+                            }
+                        })
+                        .catch(error => {
+                            document.getElementById('responseMessage').innerText = 'เกิดข้อผิดพลาดในการส่งข้อมูล';
+                            console.error('Error:', error);
+                        });
+                    });
+                </script>
+                <script src="/controller/SchoolController.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+/* Custom styles for navbar */
+.navbar-logo {
+    display: flex;
+    align-items: center;
+    background-color: orange;
+    padding: 10px;
+}
+
+.navbar-logo img {
+    height: 50px;
+    margin-right: 20px;
+}
+
+.navbar-buttons {
+    margin-left: auto; /* Push the buttons to the right */
+    display: flex;
+    align-items: center;
+}
+
+.navbar-buttons a,
+.navbar-buttons button {
+    margin-left: 10px;
+}
